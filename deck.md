@@ -2,7 +2,6 @@
 theme: gaia
 _class: lead
 paginate: true
-backgroundColor: #fff
 backgroundImage: url('./assets/kame-house.jpg')
 author: Riccardo Cardin
 lang: en
@@ -20,10 +19,7 @@ marp: true
     color:rgb(47, 95, 4);
     background-color: #ffffff77;
   }
-  p {
-    background-color: #ffffff77;
-  }
-  ul,ol {
+  section > * {
     background-color: #ffffff77;
   }
 </style>
