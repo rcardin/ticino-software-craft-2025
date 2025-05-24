@@ -350,7 +350,7 @@ Can we do better (or at least different)? 🤔
 
 ---
 
-# What's the Direct Style? 🛝
+# What's the Direct-Style? 🛝
 
 ```scala 3
 val caught = scala.util.Random.nextBoolean() // <- No monads here
@@ -560,7 +560,7 @@ val result: Either[String, String] = Random.run {
 
 # Properties of the Effect System
 
-* We can say this Effect System uses a **Direct Style Effect Handlers**
+* We can say this Effect System uses a **Direct-Style Effect Handlers**
 * It implements the _Effect Pattern_
   * The type tells us the used _effects_ and the type of the _result_
   * The execution is _deferred_
@@ -605,7 +605,7 @@ def drunkFlip(using Random, Raise[String]): String = {
 ```
 
 * Using the `def` keyword, we can _defer_ the evaluation of `genRand`
-  * But, do we really need refential transparency? 🤔
+  * But, do we really need referential transparency? 🤔
 
 ___
 
@@ -627,6 +627,22 @@ object IO {
 ```
 
 ---
+
+# Do We Like Direct-Style?
+
+💔 We lost referential transparency, but...
+
+👍 We still have **deferred execution**
+👍 We can still **track effects**
+👍 We have a syntax that is **easy to read and write**
+
+👎 A novel approach, with many unknowns
+
+Probably, it is not the best solution for every problem, but it is a **valid alternative** in 80% of the cases  🤓
+
+
+
+___
 
 # Where's My `IO` Effect?
 
@@ -721,13 +737,21 @@ If we substitute `inline` functions, we return to the version of `drunkFlip` tha
 
 <!-- _class: lead -->
 
-# So Long, and
-# Thanks for All the Fish 🐠!
-# 👋
+# By the way...
  
 **YÆS**, _Yet Another Effect System_, 
 is a library implementing what we've seen today 😜
 
+![w:300 h:300](./assets/QR-yaes.png)
+
+---
+
+<!-- _class: lead -->
+
+# So Long, and
+# Thanks for All the Fish 🐠!
+# 👋
+ 
 ---
 
 <!-- _class: lead -->
@@ -750,6 +774,7 @@ is a library implementing what we've seen today 😜
 
 * [Kyo](https://getkyo.io/), Streamlined Algebraic Effects, Simplified Functional Programming, Peak Scala Performance
 * [Scala 3 Context Functions](https://docs.scala-lang.org/scala3/reference/contextual/context-functions.html)
+* [Abilities for the monadically inclined](https://www.unison-lang.org/docs/fundamentals/abilities/for-monadically-inclined/)
 * [The Ultimate Guide to Java Virtual Threads](https://rockthejvm.com/articles/the-ultimate-guide-to-java-virtual-threads)
-* [YÆS, Yet Another Effect System](https://github.com/rcardin/yaes), An experimental effect system in Scala using capability passing style 
+* [YÆS, Yet Another Effect System](https://github.com/rcardin/yaes), An experimental effect system in Scala using Direct-Style Effect Handlers
 
