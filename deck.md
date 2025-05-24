@@ -29,7 +29,7 @@ marp: true
 <!-- _footer: "" -->
 
 # Do You Even Handle Effects?
-### Direct Style Effect System in Scala
+### Direct-Style Effect System in Scala
 
 ---
 
