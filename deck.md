@@ -14,12 +14,12 @@ marp: true
 <style>
   header,footer {
     color:rgb(34, 34, 35);
+    background-color: #ffffff00;
   }
-  h1, h3 {
+  h1, h3, h4 {
     color:rgb(47, 95, 4);
-    background-color: #ffffff77;
   }
-  section > * {
+  section > *  {
     background-color: #ffffff77;
   }
 </style>
@@ -143,10 +143,10 @@ The pattern lets us use the **substitution model** again 🚀 🎉
 
 # An Effect Example
 
-We can use **Monads**: `F[A]`
+We can use **Monads**, `F[A]`, (which fits well for the task)
 
 * Composing function returning effects is not trivial
-  * `F[_]` must be a _monad_ so we can use `flatMap` and `map`
+  * `F[_]`: We can use `flatMap` and `map`
   * Different monads are _hard to compose_ (Monad Transformers)
 
 * The `Option[A]` type models the conditional lack of a value 
@@ -289,7 +289,7 @@ object Main extends ZIOAppDefault {
 
 What if we can have types _listing Effect separately_ and _handling_ them virtually _once at a time_?
 
-**Algebraic Effects and Handlers** do exactly that 🎉
+**Algebraic Effects and Effect Handlers** do exactly that 🎉
  * The type of the function tells us exactly what effects it uses
  * **Kyo** is a novel library implementing Algebraic Effects
 
@@ -304,8 +304,6 @@ def drunkFlip: String < (IO & Abort[String]) = ???
 * Each effect has its own _rich algebra_ to describe the operations
 
 ```scala 3
-import kyo.*
-
 def drunkFlip: String < (IO & Abort[String]) = for {
   caught <- Random.nextBoolean
   heads  <- if (caught) Random.nextBoolean else Abort.fail("We dropped the coin")
@@ -313,6 +311,7 @@ def drunkFlip: String < (IO & Abort[String]) = for {
 ```
 
 * Kyo uses a _monad_ to represent the effectful computation
+  * The `<` type is an alias for a monad indeed 😅
   * We still have to use `flatMap` and `map` 
 
 ---
@@ -334,18 +333,39 @@ val partialResult: Result[String, String] < IO = Abort.run { drunkFlip }
 
 <!-- _class: lead -->
 # Build Your Own Effects System
+#### (with love ❤️)
 
 ---
 
 # Build Your Own Effects System 🛠️
 
 * All the effect systems we've seen are based on _monads_ properties to _compose effectful functions_
-  * They use _for-comprehension_ style to give an imperative flavor to a sequence of `flatMap` and `map` calls
+  * They use combinators, `flatMap` and `map`, for sequencing
+  * Programs are represented by **values**
+  * They are _referentially transparent_ and _lazy_
 
-What if we could create an effect system that _doesn't rely on monads_, but almost preserves _referential transparency_?
+However, their step curve is _steep_ and _hard to learn_ for newbies 😱 
 
-# 😱 😱 😱 😱 😱 😱 😱 😱 😱 😱 😱 😱 😱 
+Can we do better (or at least different)? 🤔
 
+---
+
+# What's the Direct Style? 🛝
+
+```scala 3
+val caught = scala.util.Random.nextBoolean() // <- No monads here
+```
+However, we need **deferred execution** and to track the effects
+
+```scala 3
+val caught: Random => Boolean = r => r.nextBoolean 
+```
+
+* Working with _functions_ instead of _values_ could be cumbersome 🙄
+  * ...or maybe not? 🤔
+
+Let's try to build an effect system using _functions_ instead of _values_ 🛠️
+  
 ---
 
 # Model the Effects' Algebra 🛠️
@@ -391,7 +411,7 @@ object Random {
 }
 ```
 
-To generate a random `Boolean`, we need to _provide_ an instance of the `Random` effect. We can call it a **capability**
+To generate a random `Boolean`, we need to _provide_ an instance of the `Random` effect
 * Calling `Random.nextBoolean` produces a _recipe_ for the program
 
 ---
@@ -540,7 +560,7 @@ val result: Either[String, String] = Random.run {
 
 # Properties of the Effect System
 
-* We can say this Effect System uses a **Capability Passing Style**
+* We can say this Effect System uses a **Direct Style Effect Handlers**
 * It implements the _Effect Pattern_
   * The type tells us the used _effects_ and the type of the _result_
   * The execution is _deferred_
@@ -549,9 +569,45 @@ val result: Either[String, String] = Random.run {
 type Effect[E, A] = E ?=> A
 ```
 
-* Handling effects at the _boundaries_ of the system, we can use the **substitution model** again* 🚀
+* We have lost _referential transparency_ 😰
 
 ---
+
+# Goodbye Referential Transparency 👋
+
+```scala 3
+def drunkFlip(using Random, Raise[String]): String = {
+    val genRand = Random.nextBoolean
+    val caught = genRand
+    val heads  = 
+      if (caught) genRand 
+      else Raise.raise("We dropped the coin")
+    if (heads) "Heads" else "Tails"
+  }
+```
+
+* `genRand` is eagerly evaluated: 
+    * Is all hope lost? 😱
+
+___
+
+# The `def` Trick 🪄
+
+```scala 3
+def drunkFlip(using Random, Raise[String]): String = {
+    def genRand = Random.nextBoolean
+    val caught = genRand
+    val heads  = 
+      if (caught) genRand 
+      else Raise.raise("We dropped the coin")
+    if (heads) "Heads" else "Tails"
+  }
+```
+
+* Using the `def` keyword, we can _defer_ the evaluation of `genRand`
+  * But, do we really need refential transparency? 🤔
+
+___
 
 # Where's My `IO` Effect?
 
