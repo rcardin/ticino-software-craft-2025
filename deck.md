@@ -41,6 +41,13 @@ marp: true
 
 # Agenda
 
+* 👋 Who Am I?
+* ❤️ Effects and 💔 Side Effects
+* 🍱 Scala Monadic Effect Systems
+* 🛠️ Build Your Own Effects System in Direct-Style
+* ➕ Adding Monadic Operations
+* 🏁 Conclusions and References
+
 ___
 
 # Who Am I?
