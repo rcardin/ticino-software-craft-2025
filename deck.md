@@ -223,7 +223,7 @@ val resultF: Future[String] = drunkFlip.unsafeToFuture()
 
 # Cats Effect
 
-The `IO[A]` hides the exact side effects that were performed. We can make them explicit using _Tagless Final_ syntax and MTL library
+The `IO[A]` hides the exact side effects that were performed. We can make them explicit using _Tagless Final_ syntax and an MTL library
 
 ```scala 3
 def drunkFlipF[F[_]: Monad](using R: Raise[F, String], A: Random[F]): F[String] =
@@ -560,7 +560,7 @@ val result: Either[String, String] = Random.run {
 
 # Properties of the Effect System
 
-* We can say this Effect System uses a **Direct-Style Effect Handlers**
+* We can say this Effect System uses **Direct-Style Effect Handlers**
 * It implements the _Effect Pattern_
   * The type tells us the used _effects_ and the type of the _result_
   * The execution is _deferred_
@@ -605,7 +605,7 @@ def drunkFlip(using Random, Raise[String]): String = {
 ```
 
 * Using the `def` keyword, we can _defer_ the evaluation of `genRand`
-  * But, do we really need referential transparency? 🤔
+  * But do we need referential transparency? 🤔
 
 ___
 
@@ -636,7 +636,7 @@ object IO {
 👍 We can still **track effects**
 👍 We have a syntax that is **easy to read and write**
 
-👎 A novel approach, with many unknowns
+👎 A novel approach with many unknowns
 
 Probably, it is not the best solution for every problem, but it is a **valid alternative** in 80% of the cases  🤓
 
