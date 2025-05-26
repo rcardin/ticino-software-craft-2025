@@ -163,9 +163,9 @@ Do you know which is the first try of an effect system on the JVM? 🤔
 String readFile(String path) throws IOException { /*... */ } 
 ```
 
-* They _tracks_ the side effects with the _exception type_
-* We must provide a _handler_ for the effect (exception)
-* They _don't defer_ the execution and are _hard to compose_
+❤️‍🔥 They _tracks_ the side effects with the _exception type_
+❤️‍🔥 We must provide a _handler_ for the effect (exception)
+🤷‍♂️ They _don't defer_ the execution and are _hard to compose_
 
 ---
 
