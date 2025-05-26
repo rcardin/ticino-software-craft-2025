@@ -147,6 +147,27 @@ The pattern lets us use the **substitution model** again 🚀 🎉
 © Adam Rosien, Essential Effects
 
 ---
+<style scoped>
+section h3 {
+  text-align: center;
+}
+</style>
+
+# Fun Fact 🤡
+
+Do you know which is the first try of an effect system on the JVM? 🤔
+
+### 🤪 Java Checked Exceptions 🤪
+
+```java
+String readFile(String path) throws IOException { /*... */ } 
+```
+
+* They _tracks_ the side effects with the _exception type_
+* We must provide a _handler_ for the effect (exception)
+* They _don't defer_ the execution and are _hard to compose_
+
+---
 
 # An Effect Example
 
