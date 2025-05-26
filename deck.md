@@ -143,7 +143,7 @@ The pattern lets us use the **substitution model** again 🚀 🎉
 
 # The Effect Pattern
 
-![width:1130](/assets/effect-pattern.png)
+![width:1130](./assets/effect-pattern.png)
 © Adam Rosien, Essential Effects
 
 ---
