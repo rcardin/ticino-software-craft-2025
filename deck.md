@@ -155,7 +155,7 @@ section h3 {
 
 # Fun Fact 🤡
 
-Do you know which is the first try of an effect system on the JVM? 🤔
+Which is the first try of an effect system on the JVM? 🤔
 
 ### 🤪 Java Checked Exceptions 🤪
 
