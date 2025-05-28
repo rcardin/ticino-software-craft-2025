@@ -464,6 +464,24 @@ To generate a random `Boolean`, we need to _provide_ an instance of the `Random`
 
 ---
 
+# Gently Reminder: Part 2
+
+```scala 3
+def nextBoolean(using r: Random): Boolean
+```
+
+* What's the `using` keyword? 🤔
+  * It's a context parameter, needed to execute the function 
+  * To run the function, the compiler must find an _implicit_/_given_ value of type `Random` in the scope
+
+```scala 3
+given random: Random = ???
+val result: Boolean = Random.nextBoolean // <- works
+val result2: Boolean = Random.nextBoolean(using random) // <- works too
+```
+
+---
+
 # Wrap It All Together
 
 We have now all the bricks to build the `drunkFlip` function again 🙌
