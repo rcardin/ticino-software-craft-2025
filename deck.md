@@ -131,7 +131,7 @@ When a side effect is _tracked_ and _controlled_ we call it an **effect**
     - We want a _recipe_ of the program.
     - **Deferred execution**
 
-The pattern lets us use the **substitution model** again 🚀 🎉
+It enables the use of the **substitution model** again 🚀 🎉
 
 ---
 
