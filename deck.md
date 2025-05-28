@@ -186,6 +186,26 @@ val maybeString: Option[String] = maybeInt.map(_.toString)
 
 ---
 
+# Gently Reminder
+
+Calling `map` and `flatMap` is cumbersome and boring  😴
+
+```scala 3
+val maybeString: Option[String] = Some(42).flatMap { maybeInt =>
+  maybeInt.map(i => i.toString)
+}
+```
+We can use a _for-comprehension_ to make it more readable 🥹
+
+```scala 3
+val maybeString: Option[String] = for {
+  maybeInt <- Some(42)
+  i <- maybeInt
+} yield i.toString
+```
+
+---
+
 # Effect Systems
 
 An **Effect System** is the implementation of the _Effect Pattern_
