@@ -675,6 +675,20 @@ def drunkFlip(using Random, Raise[String]): String = {
 
 ___
 
+# Do We Like Direct-Style?
+
+💔 We lost referential transparency, but...
+
+👍 We still have **deferred execution**
+👍 We can still **track effects**
+👍 We have a syntax that is **easy to read and write**
+
+👎 A novel approach with many unknowns
+
+Probably, it is not the best solution for every problem, but it is a **valid alternative** in 80% of the cases  🤓
+
+---
+
 # Where's My `IO` Effect?
 
 * Sometimes bad things happen. _Unpredictable_ errors are thrown
@@ -691,22 +705,6 @@ object IO {
   }
 }
 ```
-
----
-
-# Do We Like Direct-Style?
-
-💔 We lost referential transparency, but...
-
-👍 We still have **deferred execution**
-👍 We can still **track effects**
-👍 We have a syntax that is **easy to read and write**
-
-👎 A novel approach with many unknowns
-
-Probably, it is not the best solution for every problem, but it is a **valid alternative** in 80% of the cases  🤓
-
-
 
 ___
 
